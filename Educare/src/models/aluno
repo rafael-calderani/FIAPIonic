@@ -1,0 +1,23 @@
+export class Aluno {
+  id: number;
+  nome: string;
+  oQueVaiSerQuandoCrescer: string;
+  dataNascimento: Date;
+  observacoes: string;
+  criadoEm: Date;
+  modificadoEm: Date;
+
+  constructor (
+    id: number, nome: string, oQueVaiSerQuandoCrescer: string,
+    dataNascimento: Date, observacoes: string,
+    criadoEm: Date, modificadoEm: Date) {
+    this.id = id;
+    this.nome = nome;
+    this.oQueVaiSerQuandoCrescer = oQueVaiSerQuandoCrescer;
+    this.dataNascimento = dataNascimento;
+    this.observacoes = observacoes;
+    this.criadoEm = criadoEm;
+    this.modificadoEm = modificadoEm;
+  }
+
+}
