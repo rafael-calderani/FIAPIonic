@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -9,21 +12,34 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 */
 @Injectable()
 export class FirebaseProvider {
-  constructor(public afd: AngularFireDatabase) { }
+  alunoCollection: AngularFirestoreCollection<IAluno>;
+  alunoDoc: AngularFirestoreDocument<IAluno>;
+  alunoList: Observable<IAluno[]>;
+
+  constructor(public afs: AngularFirestore) { }
   /*
     Collections: alunos, atividades, biblioteca, eventos, anotaçoes
   */
 
-  getCollection(name) {
-    return this.afd.list('/' + name + '/');
+  getAlunos() {
+    this.alunoCollection = this.afs.collection('/alunos/', ref => {
+      return ref.orderBy('nome'); // we could use where clause here as well =)
+    });
+    this.alunoList = this.alunoCollection.valueChanges();
+
+    return this.alunoList;
   }
 
   addItemToCollection(collectionName, objItem) {
-    this.afd.list('/' + collectionName + '/').push(objItem);
+    this.afs.collection('/' + collectionName + '/').add(objItem);
   }
 
-  removeItemById(collectionName, id) {
-    this.afd.list('/' + collectionName + '/').remove(id);
+  deleteAluno(pathId) {
+    this.afs.doc<Aluno>(pathId).delete();
+  }
+
+  updateAluno(alunoNovo) {
+    this.alunoDoc.update(alunoNovo);
   }
 
 }

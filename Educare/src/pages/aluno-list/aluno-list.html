@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Educare -> Lista de Alunos</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,21 +10,25 @@
   <ion-row>
     <ion-col col-9>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="newItem" placeholder="Novo Aluno"></ion-input>
+        <ion-input type="text" [(ngModel)]="alunoNovo.nome" placeholder="Nome do Aluno"></ion-input>
+        <ion-input type="text" [(ngModel)]="alunoNovo.oQueVaiSerQuandoCrescer" placeholder="O que vai ser quando crescer?"></ion-input>
+        <ion-input type="Date" [(ngModel)]="alunoNovo.dataNascimento" placeholder="Data de Nascimento (dd/MM/YYYY)"></ion-input>
+        <ion-input type="text" [(ngModel)]="alunoNovo.observacoes" placeholder="Observações"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <button ion-button (click)="addItem()">Add!</button>
     </ion-col>
   </ion-row>
-
   <ion-list>
-    <ion-item-sliding *ngFor="let item of alunoList | async">
+    <ion-item-sliding *ngFor="let aluno of alunoList | async">
       <ion-item>
-        {{ item.$nome }}
+        {{ aluno.$nome }}
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
+        <button ion-button color="danger" icon-only (click)="removeAluno(aluno.$nome)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirebaseListObservable } from 'angularfire2/database';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 /**
  * Generated class for the AlunoListPage page.
@@ -16,12 +17,13 @@ import { FirebaseProvider } from './../../providers/firebase/firebase';
   templateUrl: 'aluno-list.html',
 })
 export class AlunoListPage {
-  alunoList: FirebaseListObservable<any[]>;
-  alunoNovo = '';
+  alunoList: Observable<IAluno[]>;
+  alunoNovo: Aluno;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
-      this.alunoList = this.firebaseProvider.getCollection("alunos");
+      this.alunoList = this.firebaseProvider.getAlunos();
+      this.alunoNovo =  new Aluno("", "", new Date(), "");
   }
 
   ionViewDidLoad() {
@@ -32,8 +34,8 @@ export class AlunoListPage {
     this.firebaseProvider.addItemToCollection("alunos", this.alunoNovo);
   }
 
-  removeItem(id) {
-    this.firebaseProvider.removeItemById("alunos", id);
+  removeAluno(id) {
+    this.firebaseProvider.deleteAluno(id);
   }
 
 }

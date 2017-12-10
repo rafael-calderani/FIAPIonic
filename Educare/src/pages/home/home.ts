@@ -17,6 +17,22 @@ export class HomePage {
 
   }
   navegar(page) {
-    this.navCtrl.push(page);
+    switch(page) {
+      case 'aluno':
+        this.navCtrl.push(AlunoListPage);
+        break;
+      case 'atividade':
+        this.navCtrl.push(ActivityListPage);
+        break;
+      case 'evento':
+        this.navCtrl.push(EventListPage);
+        break;
+      case 'biblioteca':
+        this.navCtrl.push(LibraryPage);
+        break;
+      case 'notes':
+        this.navCtrl.push(NotesPage);
+        break;
+    }
   }
 }

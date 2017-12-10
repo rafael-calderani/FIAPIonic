@@ -6,10 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ActivityListPage } from '../pages/activity-list/activity-list';
+import { AlunoListPage } from '../pages/aluno-list/aluno-list';
+import { EventListPage } from '../pages/event-list/event-list';
+import { LibraryPage } from '../pages/library/library';
+import { NotesPage } from '../pages/notes/notes';
 
 import { HttpModule } from '@angular/http';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule  } from 'angularfire2/firestore';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 const firebaseConfig = {
@@ -23,20 +28,20 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp, HomePage, ActivityListPage, AlunoListPage,
+    EventListPage, LibraryPage, NotesPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp, HomePage, ActivityListPage, AlunoListPage,
+    EventListPage, LibraryPage, NotesPage
   ],
   providers: [
     StatusBar,

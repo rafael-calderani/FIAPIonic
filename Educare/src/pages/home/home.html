@@ -8,25 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Bem vindo ao Educare.</h3>
-  <div style="text-align: center;">
-    <div style="width:33%;" tappable (click)="navegar(AlunoListPage)">
-      <img src="..\..\assets\imgs\student_64.png" alt="Alunos" />
-    </div>
-    <div style="width:33%;" tappable (click)="this.educareApp.navegar(ActivityListPage)">
-      <img src="..\..\assets\imgs\activities_64.png" alt="Atividades" />
-    </div>
-    <div style="width:33%;" tappable (click)="this.educareApp.navegar(EventListPage)">
-      <img src="..\..\assets\imgs\events_64.png" alt="Eventos" />
-    </div>
+  <h3 style="text-align:center;">Bem vindo ao Educare.</h3>
+  <div style="text-align: center; margin-bottom:1.2em;">
+    <span style="margin:.6em;" tappable (click)="navegar('aluno')">
+      <img src="../../assets/imgs/student_64.png" alt="Alunos" />
+    </span>
+    <span style="margin:.6em;" tappable (click)="navegar('atividade')">
+      <img src="../../assets/imgs/activities_64.png" alt="Atividades" />
+    </span>
+    <span style="margin:.6em;" tappable (click)="navegar('evento')">
+      <img src="../../assets/imgs/events_64.png" alt="Eventos" />
+    </span>
   </div>
   <div style="text-align: center;">
-    <div style="width:50%;" tappable (click)="this.educareApp.navegar(LibraryPage)">
-      <img src="..\..\assets\imgs\library_64.png" alt="Biblioteca" />
-    </div>
-    <div style="width:50%;" tappable (click)="this.educareApp.navegar(NotesPage)">
-      <img src="..\..\assets\imgs\notes_64.png" alt="Anotações" />
-    </div>
+    <span style="margin:.6em;" tappable (click)="navegar('biblioteca')">
+      <img src="../../assets/imgs/library_64.png" alt="Biblioteca" />
+    </span>
+    <span style="margin:.6em;" tappable (click)="navegar('notes')">
+      <img src="../../assets/imgs/notes_64.png" alt="Anotações" />
+    </span>
   </div>
   <!--
   <button ion-button secondary menuToggle>Toggle Menu</button>
