@@ -1,5 +1,5 @@
-interface IAluno {
-  id?: number;
+export interface IAluno {
+  id?: string;
   nome: string;
   oQueVaiSerQuandoCrescer: string;
   dataNascimento: Date;
@@ -8,8 +8,8 @@ interface IAluno {
   modificadoEm: Date;
 }
 
-class Aluno implements IAluno {
-  id?: number;
+export class Aluno implements IAluno {
+  id?: string;
   nome: string;
   oQueVaiSerQuandoCrescer: string;
   dataNascimento: Date;

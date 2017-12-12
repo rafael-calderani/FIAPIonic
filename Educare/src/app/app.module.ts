@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ActivityListPage } from '../pages/activity-list/activity-list';
 import { AlunoListPage } from '../pages/aluno-list/aluno-list';
+import { AlunoDetailPage } from '../pages/aluno-detail/aluno-detail';
 import { EventListPage } from '../pages/event-list/event-list';
 import { LibraryPage } from '../pages/library/library';
 import { NotesPage } from '../pages/notes/notes';
@@ -28,7 +29,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp, HomePage, ActivityListPage, AlunoListPage,
+    MyApp, HomePage, ActivityListPage, AlunoListPage, AlunoDetailPage,
     EventListPage, LibraryPage, NotesPage
   ],
   imports: [
@@ -40,7 +41,7 @@ const firebaseConfig = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp, HomePage, ActivityListPage, AlunoListPage,
+    MyApp, HomePage, ActivityListPage, AlunoListPage, AlunoDetailPage,
     EventListPage, LibraryPage, NotesPage
   ],
   providers: [

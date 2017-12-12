@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { Aluno, IAluno } from '../../models/aluno';
+import { AlunoDetailPage } from '../../pages/aluno-detail/aluno-detail';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -34,8 +36,11 @@ export class AlunoListPage {
     this.firebaseProvider.addItemToCollection("alunos", this.alunoNovo);
   }
 
+  updateAluno(aluno) {
+    this.navCtrl.push(AlunoDetailPage, {aluno: aluno});
+  }
+
   removeAluno(id) {
     this.firebaseProvider.deleteAluno(id);
   }
-
 }

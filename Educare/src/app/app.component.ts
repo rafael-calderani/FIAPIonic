@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+
+//import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+//import { Observable } from 'rxjs/Observable';
+//import 'rxjs/add/operator/map';
+
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';

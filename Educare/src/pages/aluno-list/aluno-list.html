@@ -11,22 +11,32 @@
     <ion-col col-9>
       <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.nome" placeholder="Nome do Aluno"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.oQueVaiSerQuandoCrescer" placeholder="O que vai ser quando crescer?"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="Date" [(ngModel)]="alunoNovo.dataNascimento" placeholder="Data de Nascimento (dd/MM/YYYY)"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.observacoes" placeholder="Observações"></ion-input>
       </ion-item>
-    </ion-col>
-    <ion-col>
-      <button ion-button (click)="addItem()">Add!</button>
+      <ion-item>
+        <button ion-button (click)="addItem()">Incluir Aluno</button>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-list>
     <ion-item-sliding *ngFor="let aluno of alunoList | async">
       <ion-item>
-        {{ aluno.$nome }}
+        <p>{{ aluno.nome }}</p>
+        <p>{{ aluno.oQueVaiSerQuandoCrescer }}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger" icon-only (click)="removeAluno(aluno.$nome)">
+        <button ion-button icon-only (click)="updateAluno(aluno)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+        <button ion-button color="danger" icon-only (click)="removeAluno(aluno.id)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
