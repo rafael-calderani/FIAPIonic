@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Aluno, IAluno } from '../../models/aluno';
+import { Activity, IActivity } from '../../models/activity';
 
 
 /*
@@ -16,6 +17,9 @@ export class FirebaseProvider {
   alunoCollection: AngularFirestoreCollection<IAluno>;
   alunoDoc: AngularFirestoreDocument<IAluno>;
   alunoList: Observable<IAluno[]>;
+  activityCollection: AngularFirestoreCollection<IActivity>;
+  activityDoc: AngularFirestoreDocument<IActivity>;
+  activityList: Observable<IActivity[]>;
 
   constructor(public afs: AngularFirestore) { }
   /*
@@ -27,9 +31,17 @@ export class FirebaseProvider {
       return ref.orderBy('nome'); // we could use where clause here as well =)
     } */
     this.alunoList = this.alunoCollection.valueChanges();
-    this.alunoCollection.ref
+    //this.alunoCollection.ref
 
     return this.alunoList;
+  }
+
+  getActivity(){
+    this.activityCollection = this.afs.collection('atividades');
+    this.activityList = this.activityCollection.valueChanges();
+    //this.activityCollection.ref
+
+    return this.activityList;
   }
 
   addItemToCollection(collectionName, objItem: Aluno) {
@@ -44,9 +56,24 @@ export class FirebaseProvider {
       modificadoEm: new Date()
     });
   }
+ addItemToCollectionActivity(collectionName, objItem: Activity) {
+   var timeStamp = new Date();
+   this.afs.collection('atividades').doc(timeStamp.toString()).set( {
+     id: timeStamp.toString(),
+     nome: objItem.nome,
+     status: objItem.status,
+     detalhes: objItem.detalhes,
+     criadoEm: new Date(),
+     modificadoEm: new Date()
+   });
+ }
 
   deleteAluno(pathId) {
     this.afs.collection('alunos').doc(pathId).delete();
+  }
+
+  deleteActivity(pathId){
+    this.afs.collection('atividades').doc(pathId).delete();
   }
 
   updateAluno(alunoNovo) {

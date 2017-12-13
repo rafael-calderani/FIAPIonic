@@ -1,18 +1,40 @@
-<!--
-  Generated template for the ActivityListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>ActivityList</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Educare -> Lista de Atividades</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <ion-row>
+    <ion-col col-9>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="activityNova.nome" placeholder="Atividade"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="activityNova.status" placeholder="Status"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="Date" [(ngModel)]="activityNova.detalhes" placeholder="Detalhes"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button (click)="addItem()">Incluir Atividade</button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item-sliding *ngFor="let activity of activityList | async">
+      <ion-item>
+        <p>{{ activity.nome }}</p>
+        <p>{{ activity.status }}</p>
+        <p>{{activity.detalhes}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeActivity(activity.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
