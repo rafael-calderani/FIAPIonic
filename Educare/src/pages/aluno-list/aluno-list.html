@@ -3,26 +3,26 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Educare -> Lista de Alunos</ion-title>
+    <ion-title>Educare - Alunos</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-row>
-    <ion-col col-9>
+    <ion-col>
       <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.nome" placeholder="Nome do Aluno"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.oQueVaiSerQuandoCrescer" placeholder="O que vai ser quando crescer?"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-input type="Date" [(ngModel)]="alunoNovo.dataNascimento" placeholder="Data de Nascimento (dd/MM/YYYY)"></ion-input>
+      <ion-item style="text-align:left;">
+        <ion-datetime style="text-align:left;" displayFormat="DD/MM/YYYY" [(ngModel)]="alunoNovo.dataNascimento"  placeholder="Dt Nascimento (dd/MM/YYYY)"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)]="alunoNovo.observacoes" placeholder="Observações"></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button (click)="addItem()">Incluir Aluno</button>
+      <ion-item style="text-align: center;">
+        <button ion-button style="margin-bottom:1.5em;" (click)="addItem()">Incluir Aluno</button>
       </ion-item>
     </ion-col>
   </ion-row>

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Educare -> Aluno</ion-title>
+    <ion-title>Educare - Aluno</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,10 +13,10 @@
   </ion-item><ion-item>
     <ion-input type="text" [(ngModel)]="alunoUpdate.oQueVaiSerQuandoCrescer" placeholder="O que vai ser quando crescer?"></ion-input>
   </ion-item><ion-item>
-    <ion-input type="Date" [(ngModel)]="alunoUpdate.dataNascimento" placeholder="Data de Nascimento (dd/MM/YYYY)"></ion-input>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="alunoUpdate.dataNascimento"  placeholder="Dt Nascimento (dd/MM/YYYY)"></ion-datetime>
   </ion-item><ion-item>
     <ion-input type="text" [(ngModel)]="alunoUpdate.observacoes" placeholder="Observações"></ion-input>
-  </ion-item><ion-item>
+  </ion-item><ion-item style="text-align: center;">
     <button ion-button (click)="update()">Atualizar Aluno</button>
   </ion-item>
 </ion-content>
