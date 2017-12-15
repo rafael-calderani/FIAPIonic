@@ -21,14 +21,9 @@ export class EventListPage {
       this.eventNova =  new Events("", "");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EventListPage');
-  }
-
    addItem() {
-     this.firebaseProvider.addItemToCollectionEvent("eventos", this.eventNova);
+     this.firebaseProvider.addEvent(this.eventNova);
    }
-
 
    removeEvent(id) {
      this.firebaseProvider.deleteEvent(id);

@@ -6,13 +6,6 @@ import { Aluno, IAluno } from '../../models/aluno';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-/**
- * Generated class for the AlunoDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-aluno-detail',
@@ -24,10 +17,7 @@ export class AlunoDetailPage {
     public firebaseProvider: FirebaseProvider) {
       this.alunoUpdate = navParams.get("aluno");
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AlunoDetailPage');
-  }
+  
   update(){
     this.firebaseProvider.updateAluno(this.alunoUpdate);
   }

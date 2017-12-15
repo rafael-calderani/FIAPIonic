@@ -6,33 +6,26 @@ import { Aluno, IAluno } from '../../models/aluno';
 import { Activity, IActivity } from '../../models/activity';
 import { Events, IEvents } from '../../models/events';
 import { Note, INote } from '../../models/note';
+import { Library, ILibrary} from '../../models/library';
 
-
-/*
-  Generated class for the FirebaseProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class FirebaseProvider {
   alunoCollection: AngularFirestoreCollection<IAluno>;
-  alunoDoc: AngularFirestoreDocument<IAluno>;
   alunoList: Observable<IAluno[]>;
+
   activityCollection: AngularFirestoreCollection<IActivity>;
-  activityDoc: AngularFirestoreDocument<IActivity>;
   activityList: Observable<IActivity[]>;
+
   eventCollection: AngularFirestoreCollection<IEvents>;
-  eventDoc: AngularFirestoreDocument<IEvents>;
   eventList: Observable<IEvents[]>;
+
   noteCollection: AngularFirestoreCollection<INote>;
-  noteDoc: AngularFirestoreDocument<INote>;
   noteList: Observable<INote[]>;
 
+  libraryCollection: AngularFirestoreCollection<ILibrary>;
+  libraryList: Observable<ILibrary[]>;
+
   constructor(public afs: AngularFirestore) { }
-  /*
-    Collections: alunos, atividades, biblioteca, eventos, anotaçoes
-  */
 
   getAlunos() {
     this.alunoCollection = this.afs.collection('alunos'); /*, ref => {
@@ -59,6 +52,7 @@ export class FirebaseProvider {
     return this.eventList;
 
   }
+
   getNote(){
     this.noteCollection = this.afs.collection('avaliacoes');
     this.noteList = this.noteCollection.valueChanges();
@@ -66,7 +60,14 @@ export class FirebaseProvider {
     return this.noteList;
   }
 
-  addItemToCollection(collectionName, objItem: Aluno) {
+  getLibrary(){
+    this.libraryCollection = this.afs.collection('biblioteca');
+    this.libraryList = this.libraryCollection.valueChanges();
+
+    return this.libraryList;
+  }
+
+  addAluno(objItem: Aluno) {
     var timeStamp = new Date();
     this.afs.collection('alunos').doc(timeStamp.toString()).set( {
       id: timeStamp.toString(),
@@ -74,22 +75,24 @@ export class FirebaseProvider {
       oQueVaiSerQuandoCrescer: objItem.oQueVaiSerQuandoCrescer,
       dataNascimento: objItem.dataNascimento,
       observacoes: objItem.observacoes,
-      criadoEm: new Date(),
-      modificadoEm: new Date()
+      criadoEm: objItem.criadoEm,
+      modificadoEm: objItem.modificadoEm
     });
   }
- addItemToCollectionActivity(collectionName, objItem: Activity) {
+
+ addActivity(objItem: Activity) {
    var timeStamp = new Date();
    this.afs.collection('atividades').doc(timeStamp.toString()).set( {
      id: timeStamp.toString(),
      nome: objItem.nome,
      status: objItem.status,
      detalhes: objItem.detalhes,
-     criadoEm: new Date(),
-     modificadoEm: new Date()
+     criadoEm: objItem.criadoEm,
+     modificadoEm: objItem.modificadoEm
    });
  }
- addItemToCollectionEvent(collectionName, objItem: Events) {
+
+ addEvent(objItem: Events) {
    var timeStamp = new Date();
    this.afs.collection('eventos').doc(timeStamp.toString()).set( {
      id: timeStamp.toString(),
@@ -97,16 +100,26 @@ export class FirebaseProvider {
      local: objItem.local
    });
  }
- addItemToCollectionNote(collectionName, objItem: Note){
+
+ addNote(objItem: Note){
    var timeStamp = new Date();
    this.afs.collection('avaliacoes').doc(timeStamp.toString()).set( {
      id: timeStamp.toString(),
      nomeAluno: objItem.nomeAluno,
      Atividade: objItem.atividade,
-     nota:objItem.nota
+     nota: objItem.nota
    });
  }
 
+ addLibrary(objItem: Library){
+   var timeStamp = new Date();
+   this.afs.collection('biblioteca').doc(timeStamp.toString()).set( {
+     id: timeStamp.toString(),
+     nome: objItem.nome,
+     link: objItem.link,
+     criadoEm: objItem.criadoEm
+   });
+ }
 
 
   deleteAluno(pathId) {
@@ -122,6 +135,9 @@ export class FirebaseProvider {
   }
   deleteNote(pathId){
     this.afs.collection('avaliacoes').doc(pathId).delete();
+  }
+  deleteLibrary(pathId){
+    this.afs.collection('biblioteca').doc(pathId).delete();
   }
 
   updateAluno(alunoNovo) {

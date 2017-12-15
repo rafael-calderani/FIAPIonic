@@ -6,13 +6,6 @@ import { AlunoDetailPage } from '../../pages/aluno-detail/aluno-detail';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-/**
- * Generated class for the AlunoListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-aluno-list',
@@ -28,12 +21,8 @@ export class AlunoListPage {
       this.alunoNovo =  new Aluno("", "", new Date(), "");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AlunoListPage');
-  }
-
   addItem() {
-    this.firebaseProvider.addItemToCollection("alunos", this.alunoNovo);
+    this.firebaseProvider.addAluno(this.alunoNovo);
   }
 
   updateAluno(aluno) {

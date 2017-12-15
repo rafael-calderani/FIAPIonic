@@ -8,15 +8,15 @@
 </ion-header>
 <ion-content padding>
   <ion-row>
-    <ion-col col-9>
+    <ion-col>
       <ion-item>
         <ion-input type="text" [(ngModel)]="eventNova.nome" placeholder="Evento"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)]="eventNova.local" placeholder="Local"></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button (click)="addItem()">Incluir Evento</button>
+      <ion-item style="text-align: center;">
+        <button ion-button style="margin-bottom:1.5em;" (click)="addItem()">Incluir Evento</button>
       </ion-item>
     </ion-col>
   </ion-row>

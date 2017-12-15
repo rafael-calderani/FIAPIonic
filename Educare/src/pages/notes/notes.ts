@@ -7,13 +7,6 @@ import {Note,INote} from '../../models/note' ;
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-/**
- * Generated class for the AlunoListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-note-list',
@@ -37,16 +30,11 @@ export class NoteListPage {
       this.Atividade = "";
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NoteListPage');
-  }
-
    addItem() {
      this.noteNova.atividade = this.Atividade;
      this.noteNova.nomeAluno = this.nomeAluno;
-     this.firebaseProvider.addItemToCollectionNote("avaliacoes", this.noteNova);
+     this.firebaseProvider.addNote(this.noteNova);
    }
-
 
    removeNota(id) {
     this.firebaseProvider.deleteNote(id);

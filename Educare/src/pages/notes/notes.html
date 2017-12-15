@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content padding>
   <ion-row>
-    <ion-col col-9>
+    <ion-col>
       <ion-list>
         <ion-item>
           <ion-label>Alunos</ion-label>
@@ -28,17 +28,17 @@
       <ion-item>
         <ion-input type="text" [(ngModel)]="noteNova.nota" placeholder="Nota"></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button (click)="addItem()">Incluir Nota</button>
+      <ion-item style="text-align: center;">
+        <button ion-button style="margin-bottom:1.5em;" (click)="addItem()">Incluir Nota</button>
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-list>
     <ion-item-sliding *ngFor="let note of noteList | async">
       <ion-item>
-        <p>{{note.nomeAluno }}</p>
-        <p>{{note.Atividade }}</p>
-        <p>{{note.nota}}</p>
+        <h2>{{note.nomeAluno }}</h2>
+        <h2>{{note.Atividade }}</h2>
+        <ion-avatar item-end>{{note.nota}}</ion-avatar>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" icon-only (click)="removeNota(note.id)">

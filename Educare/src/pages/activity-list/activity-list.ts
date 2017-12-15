@@ -21,14 +21,9 @@ export class ActivityListPage {
       this.activityNova =  new Activity("", "","", new Date(), new Date());
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ActivityListPage');
-  }
-
    addItem() {
-     this.firebaseProvider.addItemToCollectionActivity("atividades", this.activityNova);
+     this.firebaseProvider.addActivity(this.activityNova);
    }
-
 
    removeActivity(id) {
      this.firebaseProvider.deleteActivity(id);
