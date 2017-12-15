@@ -1,18 +1,50 @@
-<!--
-  Generated template for the NotesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Notes</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Educare -> Lista de Alunos</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <ion-row>
+    <ion-col col-9>
+      <ion-list>
+        <ion-item>
+          <ion-label>Alunos</ion-label>
+          <ion-select [(ngModel)]= "nomeAluno" >
+            <ion-option *ngFor="let aluno of alunoList | async" [value]="aluno.nome">{{aluno.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label>Atividades</ion-label>
+          <ion-select [(ngModel)]= "Atividade">
+            <ion-option *ngFor="let atividade of atividadeList | async" [value]="atividade.nome">{{atividade.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="noteNova.nota" placeholder="Nota"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button (click)="addItem()">Incluir Nota</button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item-sliding *ngFor="let note of noteList | async">
+      <ion-item>
+        <p>{{note.nomeAluno }}</p>
+        <p>{{note.Atividade }}</p>
+        <p>{{note.nota}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeNota(note.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

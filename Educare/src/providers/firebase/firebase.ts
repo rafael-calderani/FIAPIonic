@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Aluno, IAluno } from '../../models/aluno';
 import { Activity, IActivity } from '../../models/activity';
 import { Events, IEvents } from '../../models/events';
+import { Note, INote } from '../../models/note';
 
 
 /*
@@ -24,6 +25,9 @@ export class FirebaseProvider {
   eventCollection: AngularFirestoreCollection<IEvents>;
   eventDoc: AngularFirestoreDocument<IEvents>;
   eventList: Observable<IEvents[]>;
+  noteCollection: AngularFirestoreCollection<INote>;
+  noteDoc: AngularFirestoreDocument<INote>;
+  noteList: Observable<INote[]>;
 
   constructor(public afs: AngularFirestore) { }
   /*
@@ -54,6 +58,12 @@ export class FirebaseProvider {
 
     return this.eventList;
 
+  }
+  getNote(){
+    this.noteCollection = this.afs.collection('avaliacoes');
+    this.noteList = this.noteCollection.valueChanges();
+
+    return this.noteList;
   }
 
   addItemToCollection(collectionName, objItem: Aluno) {
@@ -87,6 +97,15 @@ export class FirebaseProvider {
      local: objItem.local
    });
  }
+ addItemToCollectionNote(collectionName, objItem: Note){
+   var timeStamp = new Date();
+   this.afs.collection('avaliacoes').doc(timeStamp.toString()).set( {
+     id: timeStamp.toString(),
+     nomeAluno: objItem.nomeAluno,
+     Atividade: objItem.atividade,
+     nota:objItem.nota
+   });
+ }
 
 
 
@@ -100,6 +119,9 @@ export class FirebaseProvider {
 
   deleteEvent(pathId){
     this.afs.collection('eventos').doc(pathId).delete();
+  }
+  deleteNote(pathId){
+    this.afs.collection('avaliacoes').doc(pathId).delete();
   }
 
   updateAluno(alunoNovo) {
