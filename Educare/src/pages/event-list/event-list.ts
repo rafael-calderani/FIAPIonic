@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { Events, IEvents} from '../../models/events';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
-/**
- * Generated class for the EventListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +12,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'event-list.html',
 })
 export class EventListPage {
+  eventList: Observable<IEvents[]>;
+  eventNova: Events;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
+      this.eventList = this.firebaseProvider.getEvent();
+      this.eventNova =  new Events("", "");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventListPage');
   }
 
+   addItem() {
+     this.firebaseProvider.addItemToCollectionEvent("eventos", this.eventNova);
+   }
+
+
+   removeEvent(id) {
+     this.firebaseProvider.deleteEvent(id);
+   }
 }

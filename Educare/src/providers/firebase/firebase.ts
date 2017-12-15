@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Aluno, IAluno } from '../../models/aluno';
 import { Activity, IActivity } from '../../models/activity';
+import { Events, IEvents } from '../../models/events';
+import { Note, INote } from '../../models/note';
 
 
 /*
@@ -20,6 +22,12 @@ export class FirebaseProvider {
   activityCollection: AngularFirestoreCollection<IActivity>;
   activityDoc: AngularFirestoreDocument<IActivity>;
   activityList: Observable<IActivity[]>;
+  eventCollection: AngularFirestoreCollection<IEvents>;
+  eventDoc: AngularFirestoreDocument<IEvents>;
+  eventList: Observable<IEvents[]>;
+  noteCollection: AngularFirestoreCollection<INote>;
+  noteDoc: AngularFirestoreDocument<INote>;
+  noteList: Observable<INote[]>;
 
   constructor(public afs: AngularFirestore) { }
   /*
@@ -42,6 +50,20 @@ export class FirebaseProvider {
     //this.activityCollection.ref
 
     return this.activityList;
+  }
+
+  getEvent(){
+    this.eventCollection = this.afs.collection('eventos');
+    this.eventList = this.eventCollection.valueChanges();
+
+    return this.eventList;
+
+  }
+  getNote(){
+    this.noteCollection = this.afs.collection('avaliacoes');
+    this.noteList = this.noteCollection.valueChanges();
+
+    return this.noteList;
   }
 
   addItemToCollection(collectionName, objItem: Aluno) {
@@ -67,6 +89,25 @@ export class FirebaseProvider {
      modificadoEm: new Date()
    });
  }
+ addItemToCollectionEvent(collectionName, objItem: Events) {
+   var timeStamp = new Date();
+   this.afs.collection('eventos').doc(timeStamp.toString()).set( {
+     id: timeStamp.toString(),
+     nome: objItem.nome,
+     local: objItem.local
+   });
+ }
+ addItemToCollectionNote(collectionName, objItem: Note){
+   var timeStamp = new Date();
+   this.afs.collection('avaliacoes').doc(timeStamp.toString()).set( {
+     id: timeStamp.toString(),
+     nomeAluno: objItem.nomeAluno,
+     Atividade: objItem.atividade,
+     nota:objItem.nota
+   });
+ }
+
+
 
   deleteAluno(pathId) {
     this.afs.collection('alunos').doc(pathId).delete();
@@ -74,6 +115,13 @@ export class FirebaseProvider {
 
   deleteActivity(pathId){
     this.afs.collection('atividades').doc(pathId).delete();
+  }
+
+  deleteEvent(pathId){
+    this.afs.collection('eventos').doc(pathId).delete();
+  }
+  deleteNote(pathId){
+    this.afs.collection('avaliacoes').doc(pathId).delete();
   }
 
   updateAluno(alunoNovo) {

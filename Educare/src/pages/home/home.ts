@@ -5,7 +5,7 @@ import { ActivityListPage } from '../activity-list/activity-list';
 import { AlunoListPage } from '../aluno-list/aluno-list';
 import { EventListPage } from '../event-list/event-list';
 import { LibraryPage } from '../library/library';
-import { NotesPage } from '../notes/notes';
+import { NoteListPage } from '../notes/notes';
 
 @Component({
   selector: 'page-home',
@@ -31,7 +31,7 @@ export class HomePage {
         this.navCtrl.push(LibraryPage);
         break;
       case 'notes':
-        this.navCtrl.push(NotesPage);
+        this.navCtrl.push(NoteListPage);
         break;
     }
   }
